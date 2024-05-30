@@ -1,4 +1,5 @@
 # DOCUMENTATION: https://kubernetes.io/docs/reference/kubernetes-api/
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#pod-v1-core
 
 apiVersion: v1
 kind: Pod
@@ -63,3 +64,4 @@ spec:
     - containerPort: 80
 
 # NOTE: you cannot modify the containers 
+
