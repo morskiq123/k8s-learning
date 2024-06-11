@@ -28,4 +28,3 @@ spec:
     image: <your-private-image>
   imagePullSecrets:
   - name: regcred
-
