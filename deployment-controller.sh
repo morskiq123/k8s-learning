@@ -91,6 +91,12 @@ kubectl edit deployment/nginx-deployment
 # exist during a ReplicaSet rollout, meaning that the 25% of unavailable pods are being replaced by the
 # 25% surge of new pods. 
 
+# You can directly change the image of the deployment by running
+# NOTE: You need to match the name of the containers!
+
+kubectl set image deployments/nginx-deployment nginx=nginx:1.16.1
+
+
 # You can rollback a rollout by using the rollout history
 
 kubectl rollout history deployment/nginx-deployment
@@ -123,3 +129,10 @@ kubectl rollout pause deployment/nginx-deployment
 # To continue, you just enter
 
 kubectl rollout resume deployment/nginx-deployment
+
+# If you want to run a blue / green deployment, you'll need to run two different deployments
+# but you'll need to edit the selectors so that they're unique. The way to load balance 
+# and actually route traffic to the two versions is to use a service controller and 
+# change the selector to point at BOTH deployments. This way, you create a load balancer that 
+# points to both deployments and you can have a slow removal of the blue deployment and slow
+# rollout of the green deployment.
