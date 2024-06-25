@@ -130,9 +130,3 @@ kubectl rollout pause deployment/nginx-deployment
 
 kubectl rollout resume deployment/nginx-deployment
 
-# If you want to run a blue / green deployment, you'll need to run two different deployments
-# but you'll need to edit the selectors so that they're unique. The way to load balance 
-# and actually route traffic to the two versions is to use a service controller and 
-# change the selector to point at BOTH deployments. This way, you create a load balancer that 
-# points to both deployments and you can have a slow removal of the blue deployment and slow
-# rollout of the green deployment.

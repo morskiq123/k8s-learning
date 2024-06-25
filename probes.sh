@@ -29,6 +29,7 @@ spec:
       periodSeconds: 10
       timeoutSeconds: 5
       failureThreshold: 5
+      
 
 # The `liveness` container runs and the healthy file is created, and after 30s, 
 # the file is deleted. The livenessProbe expects that the healthy file should exist
@@ -76,7 +77,32 @@ spec:
 
 # You can include the startup probe within the same liveness probe
 
-
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-http
+spec:
+  containers:
+  - name: liveness
+    image: registry.k8s.io/e2e-test-images/agnhost:2.40
+    args:
+    - liveness
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 5
+    startupProbe:
+    httpGet:
+      path: /healthz
+      port: liveness-port
+    failureThreshold: 30
+    periodSeconds: 10
 
 ## READINESS PROBE ##
 
